@@ -13,7 +13,7 @@ $ composer require zesty-bus/laravel-simple-search
 ## Usage
 ### Preparing your models
 First you'll need to add the SimpleSearch trait.
-``` bash
+``` php
 namespace App\Models;
 
 use ZestyBus\LaravelSimpleSearch\SimpleSearch;
@@ -24,7 +24,7 @@ class Post extends Model
 }
 ```
 Next you'll need to add a searchable property. These are the table columns you'll be searching on. If the model has a relationship, you can use dot notation to determine the path.
-``` bash
+``` php
 namespace App\Models;
 
 use ZestyBus\LaravelSimpleSearch\SimpleSearch;
@@ -45,12 +45,12 @@ class Post extends Model
 ```
 ### Searching
 To run a search use the simpleSearch() method on your queries.
-``` bash
+``` php
 $posts = Post::simpleSearch($request->query)->get();
 ```
 ### Changing the searchable property
 If you're already using a property named "searchable" you can use the getSimpleSearchColumns() method in your models to use a different property.
-``` bash
+``` php
 protected $searchableColumns = [
     'name', 'body', 'category.name'
 ];

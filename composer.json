@@ -1,0 +1,31 @@
+{
+    "name": "zesty-bus/laravel-simple-search",
+    "description": "A simple wildcard search on eloquent models.",
+    "license": "license",
+    "authors": [
+        {
+            "name": "Jay Rock",
+            "email": "jay@jayrock.co.uk",
+            "homepage": "https://www.jayrock.co.uk"
+        }
+    ],
+    "homepage": "https://github.com/zesty-bus/laravel-simple-search",
+    "keywords": ["Laravel", "LaravelSimpleSearch"],
+    "require": {
+        "illuminate/support": "~7|~8"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~9.0",
+        "orchestra/testbench": "~5|~6"
+    },
+    "autoload": {
+        "psr-4": {
+            "ZestyBus\\LaravelSimpleSearch\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ZestyBus\\LaravelSimpleSearch\\Tests\\": "tests"
+        }
+    }
+}

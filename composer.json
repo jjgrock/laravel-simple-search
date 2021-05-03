@@ -1,7 +1,7 @@
 {
     "name": "zesty-bus/laravel-simple-search",
     "description": "A simple wildcard search on eloquent models.",
-    "license": "license",
+    "license": "MIT",
     "authors": [
         {
             "name": "Jay Rock",

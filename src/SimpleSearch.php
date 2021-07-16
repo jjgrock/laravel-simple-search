@@ -11,11 +11,12 @@ trait SimpleSearch
     /**
      *  @param  \Illuminate\Database\Eloquent\Builder $query
      *  @param string $search
+     *  @param array $columns
      *  @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeSimpleSearch(Builder $query, string $search) : Builder
+    public function scopeSimpleSearch(Builder $query, string $search, array $columns = null) : Builder
     {
-        $columns = $this->getSimpleSearchColumns();
+        $columns = $columns ?? $this->getSimpleSearchColumns();
 
         if(! isset($columns)) {
             throw new SimpleSearchException('Must have a simple search property.');

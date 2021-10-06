@@ -6,33 +6,18 @@ A simple wildcard search on eloquent models.
 
 Via Composer
 
-``` bash
-$ composer require zesty-bus/laravel-simple-search
+``` sh
+composer require zesty-bus/laravel-simple-search
 ```
 
 ## Usage
 ### Preparing your models
-First you'll need to add the SimpleSearch trait.
+Add a searchable property. These are the table columns you'll be searching on. If the model has a relationship, you can use dot notation to determine the path.
 ``` php
 namespace App\Models;
 
-use ZestyBus\LaravelSimpleSearch\SimpleSearch;
-
 class Post extends Model
 {
-    use SimpleSearch;
-}
-```
-Next you'll need to add a searchable property. These are the table columns you'll be searching on. If the model has a relationship, you can use dot notation to determine the path.
-``` php
-namespace App\Models;
-
-use ZestyBus\LaravelSimpleSearch\SimpleSearch;
-
-class Post extends Model
-{
-    use SimpleSearch;
-    
     protected $searchable = [
         'name', 'body', 'category.name'
     ];
@@ -43,25 +28,52 @@ class Post extends Model
     }
 }
 ```
-### Searching
-To run a search use the simpleSearch() method on your queries.
-``` php
-$posts = Post::simpleSearch($request->query)->get();
-```
-You can also search specific columns by passing an array.
-``` php
-$posts = Post::simpleSearch($request->query, ['name'])->get();
-```
-### Changing the searchable property
-If you're already using a property named "searchable" you can use the getSimpleSearchColumns() method in your models to use a different property.
-``` php
-protected $searchableColumns = [
-    'name', 'body', 'category.name'
-];
 
-protected function getSimpleSearchColumns()
+### Searching
+To run a search use the search() method on your queries.
+``` php
+$posts = Post::search($request->query)->get();
+```
+You can override the default search columns by passing an array.
+``` php
+$posts = Post::search($request->query, ['name'])->get();
+```
+### Config
+You may want to change the search method name or the search property name on your models. First, publish the config.
+``` sh
+php artisan vendor:publish --provider="ZestyBus\LaravelSimpleSearch\LaravelSimpleSearchServiceProvider" --tag="config"
+```
+Simply change the method name or property name to something that suits your requirements.
+``` php
+return [
+
+    /**
+     *  Name of the eloquent builder method.
+     */
+    'method' => 'filter',
+
+    /**
+     *  Name of the models public searchable property.
+     */
+    'property' => 'filterable'
+];
+```
+``` php
+$posts = Post::filter($request->query, ['name'])->get();
+```
+``` php
+namespace App\Models;
+
+class Post extends Model
 {
-    return $this->searchableColumns;
+    protected $filterable = [
+        'name', 'body', 'category.name'
+    ];
+    
+    public function category()
+    {
+        return $this->hasOne(Category::class);
+    }
 }
 ```
 

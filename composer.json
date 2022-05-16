@@ -12,7 +12,7 @@
     "homepage": "https://github.com/zesty-bus/laravel-simple-search",
     "keywords": ["laravel", "laravel-simple-search", "search", "searching", "simple"],
     "require": {
-        "illuminate/support": "~7|~8"
+        "illuminate/support": "~7|~8|~9"
     },
     "require-dev": {
         "phpunit/phpunit": "~9.0",
